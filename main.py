@@ -1,6 +1,5 @@
 import requests
 import random
-import textwrap
 import re
 import os
 import time
@@ -67,60 +66,63 @@ def get_rand_file(repo):
 while True:
 	repos = get_repos()
 
-	for i in range(0,5):
-		repo = get_rand_repo(repos)
-
-		while not repo:
+	try:
+		for i in range(0,5):
 			repo = get_rand_repo(repos)
 
-		key, file, content = get_rand_file(repo)
+			while not repo:
+				repo = get_rand_repo(repos)
 
-		while not file:
-			repos.remove(repo)
-			repo = get_rand_repo(repos)
 			key, file, content = get_rand_file(repo)
 
-		if not repos:
-			break
+			while not file:
+				repos.remove(repo)
+				repo = get_rand_repo(repos)
+				key, file, content = get_rand_file(repo)
 
-
-		codes = content.split("\n")
-
-		rand_section = random.randrange(len(codes) - code_len) if len(codes) > code_len else 0
-
-		while True:
-			print("_" * 150)
-			chunks = codes[rand_section :rand_section + code_len]
-
-			print("\n".join(chunks))
-			print("_" * 150)
-
-			answer = input("what language is this? ").lower().strip()
-			
-			if answer == file["language"].lower():
+			if not repos:
 				break
 
-			if answer == "idk":
-				print("the answer is " + file["language"])
-				break
-			elif answer == "quit":
+
+			codes = content.split("\n")
+
+			rand_section = random.randrange(len(codes) - code_len) if len(codes) > code_len else 0
+
+			while True:
+				print("_" * 150)
+				chunks = codes[rand_section :rand_section + code_len]
+
+				print("\n".join(chunks))
+				print("_" * 150)
+
+				answer = input("what language is this? ").lower().strip()
+				
+				if answer == file["language"].lower():
+					break
+
+				if answer == "idk":
+					print("the answer is " + file["language"])
+					break
+				elif answer == "quit":
+					os.system("clear")
+					exit(0)
+
+				print("WRONG try again")
+
+				time.sleep(2)
 				os.system("clear")
-				exit(0)
 
-			print("WRONG try again")
 
-			time.sleep(2)
+			if answer != "idk":
+				print("you are right congrats")
+
+			time.sleep(3)
+			
 			os.system("clear")
 
 
-		if answer != "idk":
-			print("you are right congrats")
-
-		time.sleep(3)
-		
-		os.system("clear")
-
-
-		if not repos:
-			print("there is no files left.....")
-			break
+			if not repos:
+				print("there is no files left.....")
+				break
+	except:
+		pass
