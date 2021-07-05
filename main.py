@@ -109,14 +109,14 @@ while True:
 
 				print("WRONG try again")
 
-				time.sleep(2)
+				time.sleep(1)
 				os.system("clear")
 
 
 			if answer != "idk":
 				print("you are right congrats")
 
-			time.sleep(3)
+			time.sleep(2)
 			
 			os.system("clear")
 
