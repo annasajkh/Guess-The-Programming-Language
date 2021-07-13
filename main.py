@@ -38,7 +38,7 @@ def get_rand_file(repo):
 	files = repo["files"]
 
 	if not files:
-			return None, None, None
+		return None, None, None
 
 	file_keys = list(files.keys())
 
