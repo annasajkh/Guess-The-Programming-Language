@@ -9,9 +9,7 @@ def clear():
 def get_repos():
     return requests.get(f"https://api.github.com/gists/public?page={random.randrange(0, 100)}").json()
 
-
 code_len = 35
-
 
 def get_rand_repo(repos):
     if not repos:
