@@ -1,7 +1,9 @@
 import requests
 import random
+import re
 import os
 import time
+import os
 import click
 
 def clear():
